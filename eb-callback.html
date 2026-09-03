@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="utf-8">
+  <title>Aurea — Callback</title>
+</head>
+<body>
+  <h1>Aurea — autorização concluída</h1>
+  <p>Podes fechar esta página. O código de autorização está abaixo — copia-o para onde
+  te for pedido.</p>
+  <p><strong>Código:</strong> <code id="code">(a carregar…)</code></p>
+  <button onclick="copyCode()">Copiar código</button>
+  <p>Parâmetros completos devolvidos nesta página:</p>
+  <pre id="raw"></pre>
+  <p style="font-size: 0.9em; color: #555;">Esta página existe apenas para receber o
+  redirecionamento de autorização da Enable Banking, usado pela aplicação pessoal Aurea.
+  Não recolhe nem armazena nada — todo o conteúdo apresentado vem exclusivamente do
+  próprio URL desta página, no teu browser.</p>
+  <script>
+    const params = new URLSearchParams(window.location.search)
+    const code = params.get('code')
+    document.getElementById('code').textContent = code || '(nenhum "code" encontrado no URL)'
+    document.getElementById('raw').textContent = window.location.search || '(sem parâmetros)'
+    function copyCode() {
+      navigator.clipboard.writeText(code || window.location.href)
+    }
+  </script>
+</body>
+</html>
